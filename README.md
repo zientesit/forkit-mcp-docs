@@ -1,3 +1,5 @@
+<img src="logo.svg" alt="Forkit" width="32" height="76"/>
+
 # Forkit — The Reasoning Layer for Agent Swarms
 
 **Persistent coordination infrastructure for multi-agent AI systems, exposed as a single MCP endpoint.**
