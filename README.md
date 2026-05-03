@@ -45,7 +45,13 @@ Up to **99% token reduction** on complex multi-step workflows. Type definitions 
 
 ### 1. Connect your MCP client
 
-Visit **[forkit-mcp.com](https://forkit-mcp.com)** → sign in with GitHub → generate an API key.
+Paste this in your terminal — it opens GitHub auth and lands you on a page with your API key and the exact command to add Forkit to your agent:
+
+```bash
+open "https://forkit-mcp.com/connect"
+```
+
+> Linux: replace `open` with `xdg-open`
 
 Add to your MCP client config:
 
