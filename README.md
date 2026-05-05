@@ -4,7 +4,6 @@
 
 <div align="center">
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![MCP Tools](https://img.shields.io/badge/MCP_tools-7-5BFFA0.svg)](docs/tools.md)
 [![Smithery](https://smithery.ai/badge/zeintesit/forkit)](https://smithery.ai/servers/zeintesit/forkit)
 [![Website](https://img.shields.io/badge/website-forkit--mcp.com-5BFFA0.svg)](https://forkit-mcp.com)
