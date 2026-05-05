@@ -2,6 +2,8 @@
 
 # Forkit — The Reasoning Layer for Agent Swarms
 
+[![smithery badge](https://smithery.ai/badge/zeintesit/forkit)](https://smithery.ai/servers/zeintesit/forkit)
+
 **Persistent coordination infrastructure for multi-agent AI systems, exposed as a single MCP endpoint.**
 
 ```
