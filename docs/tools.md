@@ -122,7 +122,8 @@ Atomically assigns a task to an agent. Race-condition-safe — if two agents cal
 | Field | Type | Description |
 |-------|------|-------------|
 | `task_id` | `string` | ID of the task to claim (format: `tk-a1b2c3`) |
-| `claimed_by` | `string` | Agent identifier claiming the task |
+| `agent_id` | `string` | Identifier for the claiming agent (e.g. `"claude-code"` or a UUID) |
+| `enforce_assignee` | `boolean` | Optional. When `true`, rejects claim if task assignee doesn't match `agent_id` |
 
 ### Output
 
@@ -142,7 +143,7 @@ const ready = await tools.ready_tasks({ assignee: "my-agent" });
 // Claim the first one atomically
 const { task, claimed } = await tools.claim_task({
   task_id: ready[0].id,
-  claimed_by: "my-agent"
+  agent_id: "my-agent"
 });
 
 if (!claimed) {

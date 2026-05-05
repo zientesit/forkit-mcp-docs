@@ -31,7 +31,7 @@ Call: ready_tasks
 
 ### Claim work atomically with `claim_task`
 ```
-Call: claim_task { task_id: "tk-a1b2c3", claimed_by: "your-agent-name" }
+Call: claim_task { task_id: "tk-a1b2c3", agent_id: "your-agent-name" }
 → Race-condition-safe — if two agents race, exactly one wins
 → Retry if you get an error (another agent claimed it first)
 ```
