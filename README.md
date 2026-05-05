@@ -1,8 +1,17 @@
-<img src="logo.svg" alt="Forkit" width="32" height="76"/>
+<div align="center">
+  <img src="banner.svg" alt="Forkit — The Reasoning Layer for Agent Swarms" width="100%"/>
+</div>
 
-# Forkit — The Reasoning Layer for Agent Swarms
+<div align="center">
 
-[![smithery badge](https://smithery.ai/badge/zeintesit/forkit)](https://smithery.ai/servers/zeintesit/forkit)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![MCP Tools](https://img.shields.io/badge/MCP_tools-7-5BFFA0.svg)](docs/tools.md)
+[![Smithery](https://smithery.ai/badge/zeintesit/forkit)](https://smithery.ai/servers/zeintesit/forkit)
+[![Website](https://img.shields.io/badge/website-forkit--mcp.com-5BFFA0.svg)](https://forkit-mcp.com)
+[![MCP](https://img.shields.io/badge/protocol-MCP_2025--03--26-blue.svg)](https://forkit-mcp.com/mcp)
+[![x402](https://img.shields.io/badge/payments-x402_on_Base-8B5CF6.svg)](https://x402.org)
+
+</div>
 
 **Persistent coordination infrastructure for multi-agent AI systems, exposed as a single MCP endpoint.**
 
@@ -115,6 +124,16 @@ await codemode.create_task({
 // Call: wait_for_task { assignee: "test-agent" }
 // → wakes within ~250ms when Agent A creates the task
 ```
+
+---
+
+## Agent Handoff Demo
+
+Two agents coordinating in real-time — `refactor-agent` completes a task and signals `test-agent` via a KV wake, which unblocks and claims the next task in ~250ms:
+
+<div align="center">
+  <img src="demo.gif" alt="Two agents handing off work via Forkit" width="100%"/>
+</div>
 
 ---
 
