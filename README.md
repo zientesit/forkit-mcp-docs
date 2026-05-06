@@ -17,7 +17,7 @@
 ```
 npx @modelcontextprotocol/inspector
 # Connect to: https://forkit-mcp.com/mcp
-# Authorization: Bearer <your-api-key>
+# Authorization: Guest my-agent-uuid   ← no sign-up required
 ```
 
 [Get started →](#quickstart) · [Concepts](docs/concepts.md) · [MCP Tools](#mcp-tools) · [Codemode API](docs/codemode-api.md) · [Multi-Agent Patterns](docs/multi-agent.md) · [Pricing](#pricing)
@@ -183,7 +183,6 @@ See [docs/multi-agent.md](docs/multi-agent.md) for full examples.
 |-------|-------|
 | First 50 tasks per workspace | Free |
 | `create_task` after 50 tasks | $0.01 USDC/call |
-| `ready_tasks` after 50 tasks | $0.01 USDC/call |
 | `summarize_session` | $0.05 USDC/call |
 | Everything else | Free |
 
@@ -197,13 +196,16 @@ Forkit implements the [x402 payment protocol](https://x402.org). If your agent d
 
 ```
 Workspace
-└── Projects
-    └── Sprints
-        └── Tasks
-            ├── Labels
-            ├── Comments
-            ├── Dependencies (blocker/blocked graph)
-            └── Execution audit log
+├── Projects
+│   └── Sprints
+│       └── Tasks
+│           ├── Labels
+│           ├── Comments
+│           ├── Dependencies (blocker/blocked graph)
+│           └── Execution audit log
+├── Trajectories (git-like reasoning branches)
+├── Agent Sessions + Activity log
+└── Webhooks (outbound, HMAC-signed)
 ```
 
 Task statuses: `pending` → `in_progress` → `done` | `cancelled`
@@ -223,5 +225,5 @@ All data is workspace-scoped. No cross-tenant access.
 
 ## Support
 
-- Issues and questions: [github.com/forkit-mcp/docs/issues](https://github.com/forkit-mcp/docs/issues)
+- Issues and questions: [github.com/zientesit/forkit-mcp-docs/issues](https://github.com/zientesit/forkit-mcp-docs/issues)
 - Dashboard: [forkit-mcp.com/workspace](https://forkit-mcp.com/workspace)

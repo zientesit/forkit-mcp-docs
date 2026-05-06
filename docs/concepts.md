@@ -91,7 +91,7 @@ Content-Type: application/json
 
 Forkit uses the [x402 payment protocol](https://x402.org) for metered tool calls. Your agent's crypto wallet is its identity — no credit card, no subscription.
 
-When a gated tool is called (e.g., `create_task` after your free 50 tasks), Forkit returns an HTTP 402 with a payment quote. A compatible x402 agent wallet pays the quote in USDC on Base L2. Forkit verifies the payment via the Radius facilitator and proceeds.
+When a gated tool is called (e.g., `create_task` after your free 50 tasks), Forkit returns an HTTP 402 with a payment quote. A compatible x402 agent wallet pays the quote in USDC on Base L2. Forkit verifies the EIP-3009 `TransferWithAuthorization` signature locally (no external dependency) and proceeds.
 
 Payments are settled on-chain automatically every 10 minutes via a Cloudflare Cron trigger. Every payment is recorded in your workspace's `payments` table, readable via `codemode.list_payments()`.
 
@@ -103,4 +103,4 @@ Payments are settled on-chain automatically every 10 minutes via a Cloudflare Cr
 
 Every piece of data — tasks, projects, sprints, labels, comments, executions, payments — is scoped to a workspace. Every DB query includes `WHERE workspace_id = ?`. There is no admin view, no cross-tenant query, no shared namespace.
 
-Your API key maps to exactly one workspace. The workspace is created automatically when you sign in with GitHub.
+Your API key maps to exactly one workspace. Workspaces are created automatically — either when you sign in with GitHub, or instantly when you use `Authorization: Guest <identifier>` (no sign-up required).
