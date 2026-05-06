@@ -55,15 +55,30 @@ Up to **99% token reduction** on complex multi-step workflows. Type definitions 
 
 ### 1. Connect your MCP client
 
-Paste this in your terminal — it opens GitHub auth and lands you on a page with your API key and the exact command to add Forkit to your agent:
+**No sign-up required.** Pick any stable identifier for your agent (a UUID, a name, anything) and use it as a guest token. Forkit auto-provisions an isolated workspace on first use:
 
-```bash
-open "https://forkit-mcp.com/connect"
+```json
+{
+  "mcpServers": {
+    "forkit": {
+      "url": "https://forkit-mcp.com/mcp",
+      "headers": {
+        "Authorization": "Guest my-agent-uuid"
+      }
+    }
+  }
+}
 ```
 
-> Linux: replace `open` with `xdg-open`
+**Claude Code:**
+```bash
+claude mcp add forkit --transport http https://forkit-mcp.com/mcp \
+  --header "Authorization: Guest my-agent-uuid"
+```
 
-Add to your MCP client config:
+> Your workspace is tied to the identifier you choose. Use the same identifier across sessions to keep your task history. Guest workspaces include 50 free tasks.
+
+**Want a persistent account with a dashboard?** Sign in at [forkit-mcp.com](https://forkit-mcp.com) for a full API key:
 
 ```json
 {
@@ -76,12 +91,6 @@ Add to your MCP client config:
     }
   }
 }
-```
-
-**Claude Code:**
-```bash
-claude mcp add forkit --transport http https://forkit-mcp.com/mcp \
-  --header "Authorization: Bearer YOUR_API_KEY"
 ```
 
 ### 2. Get type definitions (once per session)

@@ -13,20 +13,24 @@ A single MCP endpoint at `https://forkit-mcp.com/mcp` that gives your agent:
 
 ## Setup
 
+No sign-up required. Pick any stable identifier and use it as a guest token:
+
 ```json
 {
   "mcpServers": {
     "forkit": {
       "url": "https://forkit-mcp.com/mcp",
       "headers": {
-        "Authorization": "Bearer YOUR_API_KEY"
+        "Authorization": "Guest my-agent-uuid"
       }
     }
   }
 }
 ```
 
-Get an API key at https://forkit-mcp.com/connect
+Use the **same identifier every session** — your workspace and task history persist as long as you reuse it. Guest workspaces include 50 free tasks.
+
+For a full account with a monitoring dashboard: https://forkit-mcp.com/connect
 
 ## Session Protocol
 

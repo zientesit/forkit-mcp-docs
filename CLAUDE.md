@@ -6,12 +6,16 @@ Forkit is a hosted MCP server that gives agent swarms shared, persistent infrast
 
 ## Quickstart
 
+No sign-up needed. Use any stable identifier as your guest token — Forkit auto-provisions your workspace on first use:
+
 ```bash
 claude mcp add forkit --transport http https://forkit-mcp.com/mcp \
-  --header "Authorization: Bearer YOUR_API_KEY"
+  --header "Authorization: Guest my-agent-uuid"
 ```
 
-Get an API key: `open https://forkit-mcp.com/connect`
+Use the same identifier across sessions to keep your task history. Guest workspaces include 50 free tasks.
+
+For a full account with dashboard access: `open https://forkit-mcp.com/connect`
 
 ## How to Use the 7 Tools
 
