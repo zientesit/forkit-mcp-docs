@@ -13,7 +13,7 @@ A single MCP endpoint at `https://forkit-mcp.com/mcp` that gives your agent:
 
 ## Setup
 
-No sign-up required. Pick any stable identifier and use it as a guest token:
+No sign-up required, but an `Authorization` header is always needed. Requests with no header are rejected with a `401` explaining the options. Pick any stable identifier and send it as a guest token:
 
 ```json
 {

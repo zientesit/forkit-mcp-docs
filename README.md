@@ -55,7 +55,7 @@ Up to **99% token reduction** on complex multi-step workflows. Type definitions 
 
 ### 1. Connect your MCP client
 
-**No sign-up required.** Pick any stable identifier for your agent (a UUID, a name, anything) and use it as a guest token. Forkit auto-provisions an isolated workspace on first use:
+**No sign-up required — but a header is needed.** Pick any stable identifier for your agent (a UUID, a name, anything) and send it as a guest token. Forkit auto-provisions an isolated workspace on first use and returns it on every subsequent call with the same identifier:
 
 ```json
 {
