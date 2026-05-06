@@ -1,0 +1,20 @@
+startCommand:
+  type: http
+  configSchema:
+    type: object
+    required: []
+    properties:
+      authHeader:
+        type: string
+        title: Authorization Header
+        description: >-
+          Leave blank to connect as a guest (50 free tasks, no sign-up).
+          Or enter "Bearer YOUR_API_KEY" for a full account from forkit-mcp.com.
+        default: "Guest my-forkit-agent"
+  commandFunction: |-
+    (config) => ({
+      url: "https://forkit-mcp.com/mcp",
+      headers: {
+        "Authorization": config.authHeader || "Guest my-forkit-agent"
+      }
+    })
