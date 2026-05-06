@@ -19,6 +19,8 @@ create_task(input: {
   priority?: "low" | "medium" | "high" | "urgent";
   assignee?: string;              // agent identifier
   estimate?: number;              // story points or hours
+  parent_id?: string | null;      // parent task ID for sub-tasks
+  due_date?: string | null;       // ISO date string
   metadata?: Record<string, unknown>;
 }): Promise<Task>
 ```
@@ -56,6 +58,9 @@ update_task(
     assignee?: string;
     estimate?: number;
     sprint_id?: string;
+    project_id?: string;
+    parent_id?: string | null;
+    due_date?: string | null;
     metadata?: Record<string, unknown>;
   }
 ): Promise<Task>
@@ -161,6 +166,12 @@ create_sprint(input: {
 
 ```typescript
 list_sprints(project_id?: string): Promise<Sprint[]>
+```
+
+### `get_sprint(sprint_id)`
+
+```typescript
+get_sprint(sprint_id: string): Promise<Sprint | null>
 ```
 
 ### `get_active_sprint(project_id)`
@@ -358,6 +369,7 @@ complete_session(input: {
 list_sessions(filter?: {
   task_id?: string;
   agent_id?: string;
+  status?: string;
   limit?: number;
 }): Promise<Session[]>
 ```
@@ -430,6 +442,8 @@ type Task = {
   assignee?: string;
   claimed_by?: string;
   estimate?: number;
+  parent_id?: string;
+  due_date?: string;
   project_id?: string;
   sprint_id?: string;
   metadata?: Record<string, unknown>;
