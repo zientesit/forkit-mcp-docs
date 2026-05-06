@@ -78,12 +78,12 @@ ready_tasks(filter?: {
 
 Returns tasks where status is `pending` and all dependency blockers are `done` or `cancelled`. Topologically sorted — no need to walk the dependency graph.
 
-### `claim_task(task_id, claimed_by)`
+### `claim_task(task_id, agent_id)`
 
 ```typescript
 claim_task(
   task_id: string,
-  claimed_by: string
+  agent_id: string
 ): Promise<{ task: Task; claimed: boolean }>
 ```
 
@@ -267,6 +267,153 @@ type Payment = {
   created_at: string;
 };
 ```
+
+---
+
+## Trajectories
+
+Git-like versioning of agent reasoning. Fork before a risky operation, revert if it fails, merge if it succeeds.
+
+### `fork_trajectory(input)`
+
+```typescript
+fork_trajectory(input: {
+  name: string;               // branch name (e.g. "refactor-attempt-1")
+  from_execution_id?: string; // fork from a specific execution (defaults to HEAD)
+}): Promise<Trajectory>
+```
+
+### `switch_trajectory(input)`
+
+```typescript
+switch_trajectory(input: {
+  id: string;  // trajectory ID to switch HEAD to
+}): Promise<{ ok: boolean }>
+```
+
+If `ok` is `false`, HEAD was changed by another agent — call `get_current_trajectory()` and retry.
+
+### `list_trajectories()`
+
+```typescript
+list_trajectories(): Promise<Trajectory[]>
+```
+
+### `get_current_trajectory()`
+
+```typescript
+get_current_trajectory(): Promise<Trajectory | null>
+```
+
+```typescript
+type Trajectory = {
+  id: string;
+  name: string;
+  parent_id?: string;
+  is_head: boolean;
+  created_at: string;
+};
+```
+
+---
+
+## Sessions
+
+Track agent work sessions with structured activity logs.
+
+### `start_session(input)`
+
+```typescript
+start_session(input: {
+  task_id: string;
+  agent_id: string;
+  notes?: string;
+}): Promise<Session>
+```
+
+### `log_activity(input)`
+
+```typescript
+log_activity(input: {
+  session_id: string;
+  type: string;           // e.g. "tool_call", "decision", "error"
+  body: string;
+  execution_id?: string;
+}): Promise<void>
+```
+
+### `complete_session(input)`
+
+```typescript
+complete_session(input: {
+  session_id: string;
+  status: string;         // e.g. "completed", "failed", "abandoned"
+  notes?: string;
+}): Promise<Session>
+```
+
+### `list_sessions(filter?)`
+
+```typescript
+list_sessions(filter?: {
+  task_id?: string;
+  agent_id?: string;
+  limit?: number;
+}): Promise<Session[]>
+```
+
+```typescript
+type Session = {
+  id: string;
+  task_id: string;
+  agent_id: string;
+  status: string;
+  notes?: string;
+  created_at: string;
+  completed_at?: string;
+};
+```
+
+---
+
+## Webhooks
+
+Register outbound webhooks to get notified when task events happen. Deliveries are signed with HMAC-SHA256.
+
+### `register_webhook(input)`
+
+```typescript
+register_webhook(input: {
+  url: string;
+  events: string[];   // e.g. ["task.created", "task.updated", "task.done"]
+  secret: string;     // used to sign deliveries via X-MCP-Signature header
+}): Promise<Webhook>
+```
+
+### `list_webhooks()`
+
+```typescript
+list_webhooks(): Promise<Webhook[]>
+```
+
+### `delete_webhook(id)`
+
+```typescript
+delete_webhook(id: string): Promise<void>
+```
+
+```typescript
+type Webhook = {
+  id: string;
+  url: string;
+  events: string[];
+  created_at: string;
+};
+```
+
+Delivery payload: `{ event: string, task: Task, workspace_id: string, timestamp: string }`
+
+Verify delivery: `X-MCP-Signature: sha256=<hmac>` computed over the raw request body with your secret.
 
 ---
 
