@@ -117,13 +117,17 @@ create_project(input: {
   name: string;         // max 200 chars
   description?: string; // max 10,000 chars
   icon?: string;
+  kind?: string;        // free-form classification, e.g. "backend", "research", "infra"
 }): Promise<Project>
 ```
 
-### `list_projects()`
+### `list_projects(filters?)`
 
 ```typescript
-list_projects(): Promise<Project[]>
+list_projects(filters?: {
+  status?: "active" | "archived";
+  kind?: string;        // filter to a specific classification
+}): Promise<Project[]>
 ```
 
 ### `get_project(project_id)`
@@ -142,6 +146,7 @@ update_project(
     description?: string;
     status?: "active" | "archived";
     icon?: string;
+    kind?: string;
   }
 ): Promise<Project>
 ```
@@ -457,6 +462,7 @@ type Project = {
   description?: string;
   status: "active" | "archived";
   icon?: string;
+  kind?: string;
   created_at: string;
   updated_at: string;
 };

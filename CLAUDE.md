@@ -88,5 +88,6 @@ Key functions:
 - `codemode.update_task({ task_id, status?, title?, description? })`
 - `codemode.claim_task({ task_id, claimed_by })`
 - `codemode.add_dependency({ blocker_id, blocked_id })`
-- `codemode.create_project({ name, description? })`
+- `codemode.create_project({ name, description?, kind? })`
+- `codemode.list_projects({ status?, kind? })`
 - `codemode.list_payments({ since?, limit? })`
